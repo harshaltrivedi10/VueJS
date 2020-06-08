@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Monster Slayer</title>
+    <link rel="stylesheet" href="css/foundation.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <script src="./Vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <section class="row">
+        <div class="small-6 columns">
+          <h1 class="text-center">YOU</h1>
+          <div class="healthbar">
+            <div
+              class="healthbar text-center"
+              style="background-color: green; margin: 0; color: white;"
+              :style="{width: myHealthBar + '%'}"
+            ></div>
+          </div>
+        </div>
+        <div class="small-6 columns">
+          <h1 class="text-center">MONSTER</h1>
+          <div class="healthbar">
+            <div
+              class="healthbar text-center"
+              style="background-color: green; margin: 0; color: white;"
+              :style="{width: monsterHealthBar +'%'}"
+            ></div>
+          </div>
+        </div>
+      </section>
+      <section class="row controls" v-if="showStartNewGame">
+        <div class="small-12 columns">
+          <button id="start-game" @click="toggleStartNewGame">
+            START NEW GAME
+          </button>
+        </div>
+      </section>
+      <section class="row controls" v-else>
+        <div class="small-12 columns">
+          <button id="attack" @click="clickAttack">ATTACK</button>
+          <button id="special-attack" @click="clickSpecialAttack">
+            SPECIAL ATTACK
+          </button>
+          <button id="heal" @click="clickHeal">HEAL</button>
+          <button id="give-up" @click="clickGiveUp">GIVE UP</button>
+        </div>
+      </section>
+      <section class="row log" v-if="showGameDetails">
+        <div class="small-12 columns">
+          <ul>
+            <template v-for="move in moves">
+              <li class="player-turn">{{move.me}}</li>
+              <li v-if="move.monster" class="monster-turn">{{move.monster}}</li>
+            </template>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </body>
+  <script src="./app.js"></script>
+</html>
