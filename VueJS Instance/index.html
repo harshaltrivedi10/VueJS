@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VueJS Instance</title>
+    <script src="./Vue.js"></script>
+  </head>
+  <body>
+    <div id="app1">
+      <!-- ref is a attribute/key added/recognised by vuejs -->
+      <h1 ref="heading">{{ title }}</h1>
+      <button v-on:click="show">Show Paragraph</button>
+      <p v-if="showParagraph">This is not always visible</p>
+    </div>
+
+    <div id="app2">
+      <h1 ref="heading">{{ title }}</h1>
+      <button @click="changeTitle">Change Title in 1st instance</button>
+    </div>
+
+    <div id="app3"></div>
+  </body>
+  <script src="./app.js"></script>
+</html>
