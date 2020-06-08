@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditionals and Lists</title>
+    <script src="./Vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- used v-for to get item and index of the item  key is used to uniquely idetify elements in a list-->
+      <ul>
+        <li v-for="(item, i) in ingredients" :key="item">
+          {{ item }} || (index: {{ i }})
+        </li>
+      </ul>
+      <hr />
+      <!-- different way to use v-for -->
+      <template v-for="(ingredient, index) in ingredients">
+        <h3>{{ ingredient }}</h3>
+        <p>{{ index }}</p>
+      </template>
+
+      <hr />
+
+      <ul>
+        <li v-for="person in persons">
+          <span v-for="(value, key, index) in person"
+            >{{ key }}: {{ value }} & index: {{ index }} ||
+          </span>
+        </li>
+      </ul>
+
+      <hr />
+      <!-- output a list of numbers -->
+      <ul>
+        <li v-for="n in 10">{{ n }}</li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          ingredients: ['meat', 'fruit', 'cookies'],
+          persons: [
+            { name: 'Harshal', age: '22', color: 'blue' },
+            { name: 'Lol', age: '28', color: 'green' }
+          ]
+        };
+      },
+      methods: {}
+    });
+  </script>
+</html>
