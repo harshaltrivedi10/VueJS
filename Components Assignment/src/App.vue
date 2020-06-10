@@ -1,28 +1,28 @@
 <template>
   <div class="container">
-    <div class="row">
-      <header-vue></header-vue>
-    </div>
+    <header-vue></header-vue>
+
     <hr />
     <div class="row">
-      <body-vue />
+      <servers-vue />
+      <server-details-vue />
     </div>
     <hr />
-    <div class="row">
-      <footer-vue></footer-vue>
-    </div>
+    <footer-vue></footer-vue>
   </div>
 </template>
 
 <script>
 import HeaderVue from "./Components/Shared/Header.vue";
-import BodyVue from "./Components/Servers/Body.vue";
+import ServersVue from "./Components/Servers/Servers.vue";
+import ServerDetailsVue from "./Components/Servers/ServerDetails.vue";
 import FooterVue from "./Components/Shared/Footer.vue";
 
 export default {
   components: {
     HeaderVue,
-    BodyVue,
+    ServersVue,
+    ServerDetailsVue,
     FooterVue
   }
 };
