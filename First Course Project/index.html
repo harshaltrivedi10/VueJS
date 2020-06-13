@@ -50,9 +50,11 @@
       <section class="row log" v-if="showGameDetails">
         <div class="small-12 columns">
           <ul>
-            <template v-for="move in moves">
+            <template v-for="(move, index) in moves">
               <li class="player-turn">{{move.me}}</li>
-              <li v-if="move.monster" class="monster-turn">{{move.monster}}</li>
+              <li v-if="move.monster" class="monster-turn">
+                {{move.monster}}
+              </li>
             </template>
           </ul>
         </div>
