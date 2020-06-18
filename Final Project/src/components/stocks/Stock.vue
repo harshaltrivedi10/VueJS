@@ -45,11 +45,13 @@ export default {
   methods: {
     buyStock() {
       const order = {
+        // goes into a portfolio
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: this.quantity,
       };
-      console.log(order);
+      // console.log(order);
+      this.$store.dispatch("buyStock", order);
       this.quantity = 0;
     },
   },
