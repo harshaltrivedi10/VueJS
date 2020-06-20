@@ -12,13 +12,16 @@
 import { mapGetters } from "vuex";
 import Stock from "./Stock.vue";
 export default {
+  computed: {
+    stocks() {
+      return this.$store.getters.stockPortfolio;
+    },
+  },
   components: {
     appStock: Stock,
   },
-  computed: {
-    ...mapGetters({
-      stocks: "stockPortfolio",
-    }),
+  created() {
+    console.log("In created", this.stocks);
   },
 };
 </script>

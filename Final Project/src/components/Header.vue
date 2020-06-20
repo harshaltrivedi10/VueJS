@@ -47,6 +47,19 @@
           </div>
         </li>
       </ul>
+      <strong class="navbar-text navbar-right"
+        >Funds Available: {{ funds | currency }}</strong
+      >
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
+  },
+};
+</script>

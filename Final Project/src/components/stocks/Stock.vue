@@ -14,15 +14,16 @@
             placeholder="Quantity"
             class="form-control"
             v-model="quantity"
+            :class="insufficientFunds ? 'danger' : ''"
           />
         </div>
         <div class="float-right">
           <button
             class="btn btn-success"
             @click="buyStock"
-            :disabled="quantity <= 0"
+            :disabled="quantity <= 0 || insufficientFunds"
           >
-            Buy
+            {{ insufficientFunds ? "Insufficient Funds" : "Buy" }}
           </button>
         </div>
       </div>
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: {
     stock: {
@@ -48,14 +50,24 @@ export default {
         // goes into a portfolio
         stockId: this.stock.id,
         stockPrice: this.stock.price,
-        quantity: this.quantity,
+        quantity: Number(this.quantity),
       };
       // console.log(order);
       this.$store.dispatch("buyStock", order);
       this.quantity = 0;
     },
   },
+  computed: {
+    ...mapGetters(["funds"]),
+    insufficientFunds() {
+      return this.quantity * this.stock.price > this.funds;
+    },
+  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.danger {
+  border: 1px solid red;
+}
+</style>
