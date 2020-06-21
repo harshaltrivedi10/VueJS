@@ -27,9 +27,11 @@
         </router-link>
       </ul>
       <ul class="navbar-nav navbar-right">
-        <li class="nav-item"><a href="" class="nav-link">End Day</a></li>
+        <li class="nav-item" style="cursor: pointer;">
+          <a @click="endDay" class="nav-link">End Day</a>
+        </li>
 
-        <li class="nav-item dropdown">
+        <li class="dropdown" @click="isDropdownOpen = !isDropdownOpen">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -41,9 +43,13 @@
           >
             Save & Load
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Save Data</a>
-            <a class="dropdown-item" href="#">Load Data</a>
+          <div
+            class="dropdown-menu"
+            :class="isDropdownOpen ? 'show' : ''"
+            aria-labelledby="navbarDropdown"
+          >
+            <a class="dropdown-item" @click="saveData" href="#">Save Data</a>
+            <a class="dropdown-item" @click="loadData" href="#">Load Data</a>
           </div>
         </li>
       </ul>
@@ -55,10 +61,37 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import HTTP from "../axios";
 export default {
+  data() {
+    return {
+      isDropdownOpen: false,
+    };
+  },
   computed: {
     funds() {
       return this.$store.getters.funds;
+    },
+  },
+  methods: {
+    ...mapActions({
+      randomizeStocks: "randomizeStocks",
+      fetchData: "loadData",
+    }),
+    endDay() {
+      this.randomizeStocks();
+    },
+    saveData() {
+      const data = {
+        funds: this.$store.getters.funds,
+        stockPortfolio: this.$store.getters.stockPortfolio,
+        stocks: this.$store.getters.stocks,
+      };
+      HTTP.put("data.json", data);
+    },
+    loadData() {
+      this.fetchData();
     },
   },
 };
