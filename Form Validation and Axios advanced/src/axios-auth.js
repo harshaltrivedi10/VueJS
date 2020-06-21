@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://form-validation-and-vue.firebaseio.com"
-})
+  baseURL: "https://identitytoolkit.googleapis.com/v1/accounts",
+});
 
-instance.defaults.headers.common["SOMETHINGS"] = 'lalala';
+// instance.defaults.headers.common["SOMETHINGS"] = "lalala";
 
-export default instance
+export default instance;
